@@ -8,8 +8,8 @@ import {SearchComponent} from './components/search/search.component';
 // import { AuthGuardService } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginPageComponent },
-  { path: 'index', component: SearchComponent},
+  { path: 'index', component: LoginPageComponent },
+  // { path: 'index', component: SearchComponent},
   // { path: 'login', component: LoginPageComponent }
 ];
 

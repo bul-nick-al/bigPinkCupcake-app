@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
+import {AmplifyService} from 'aws-amplify-angular';
+import {AuthService} from '../../services/auth.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login-page',
@@ -8,13 +12,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  // constructor(private router: Router) { }
+  public formGroup: FormGroup;
+
+  constructor(private authService: AuthService,  private router: Router) {
+    this.authService = authService;
+    this.formGroup = new FormGroup({
+      login: new FormControl(''),
+      password: new FormControl(''),
+    });
+  }
 
   ngOnInit() {
   }
 
-  // onLoginClick() {
-  //   this.router.navigate(['index']);
-  // }
+  onLoginClick() {
+    this.authService.signIn(this.formGroup.get('login').value, this.formGroup.get('password').value)
+      .subscribe(
+        () => this.router.navigate(['xxx']),
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
 
 }
