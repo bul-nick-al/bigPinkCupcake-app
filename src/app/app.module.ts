@@ -8,12 +8,14 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import {AppComponent} from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SearchComponent } from './components/search/search.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    SearchComponent
+    SearchComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

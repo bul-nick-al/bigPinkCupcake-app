@@ -1,0 +1,19 @@
+.fixed-tooblar {
+  position: fixed;
+  background-color: #F865B0;
+  display: inline-block;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.menu-button {
+  padding: 4px;
+  width: 100px;
+}
+
