@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+$font-family: 'Raleway, sans-serif'
+);
+@include angular-material-typography($custom-typography);
+
+body{
+  font-family: 'Raleway', sans-serif;
+  color: #48304D;
+}
+
+.f20px {
+  font-size: 20px;
+}
+
+.f15px {
+  font-size: 15px;
+}

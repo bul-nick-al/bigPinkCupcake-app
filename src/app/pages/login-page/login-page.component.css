@@ -1,0 +1,32 @@
+.login-body {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #F9F4F8;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+.cupcake-logo{
+  width: 50%;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.form > * {
+  width: 70%;
+}
+
+
+.login-button {
+  border-radius: 10px;
+  border-color: #F865B0;
+}
+
+.register-link{
+  color: #F865B0;
+  margin-top: 40px;
+}
