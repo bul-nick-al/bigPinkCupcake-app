@@ -11,7 +11,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 
-import {AuthenticatorComponent} from 'aws-amplify-angular/dist/src/components/authenticator/authenticator/authenticator.factory';
+
 import {AuthService} from './services/auth.service';
 
 import {ReactiveFormsModule} from '@angular/forms';
@@ -36,7 +36,6 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
     RouterModule,
     AmplifyAngularModule,
   ],
-  entryComponents: [AuthenticatorComponent],
   providers: [AmplifyService, AuthService],
   bootstrap: [AppComponent],
 })

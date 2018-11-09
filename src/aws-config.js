@@ -27,8 +27,8 @@ var aws_user_pools_web_client_id = '1vn383c2uqg0n61g4vhs37s4kk';
 
 AWS.config.region = aws_project_region;
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-  IdentityPoolId: aws_cognito_identity_pool_id
-}, {
-  region: aws_cognito_region
-});
+    IdentityPoolId: aws_cognito_identity_pool_id
+  }, {
+    region: aws_cognito_region
+  });
 AWS.config.update({customUserAgent: 'MobileHub v0.1'});

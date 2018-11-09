@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -10,11 +10,17 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
 
-  myControl = new FormControl();
+  public formGroup: FormGroup;
+  public myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
-  constructor() { }
+  constructor() {
+    this.myControl = new FormControl('');
+    this.formGroup = new FormGroup({
+      search: this.myControl,
+    });
+  }
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(

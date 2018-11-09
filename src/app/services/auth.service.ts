@@ -15,16 +15,15 @@ export class AuthService {
     this.user = null;
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        if (!authState.user) {
-          this.user = null;
-        } else {
-          this.user = authState.user;
+        if (authState.state === 'signedIn') {
+          localStorage.setItem('isSignedIn', 'true');
         }
       });
   }
 
   public isSignedIn(): boolean {
-    return !(this.user === null);
+    console.log(localStorage.getItem('isSignedIn'));
+    return !!localStorage.getItem('isSignedIn');
   }
 
   public getUser(): CognitoUser {
@@ -32,10 +31,12 @@ export class AuthService {
   }
 
   public signIn(login: string, password: string): Observable<CognitoUser> {
+    console.log(login, password);
     return fromPromise(this.amplifyService.auth().signIn(login, password));
   }
 
   public signOut(): Observable<any> {
+    localStorage.removeItem('isSignedIn');
     return fromPromise(this.amplifyService.auth().signOut());
   }
 }
