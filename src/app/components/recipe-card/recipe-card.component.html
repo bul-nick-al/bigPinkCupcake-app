@@ -1,6 +1,6 @@
-<mat-card class="example-card">
+<mat-card class="example-card" xmlns:limitTo="http://www.w3.org/1999/xhtml">
   <mat-card-header>
-    <mat-card-title>Valila churros</mat-card-title>
+    <mat-card-title>Vanilla churros</mat-card-title>
     <mat-card-subtitle>Medium</mat-card-subtitle>
   </mat-card-header>
   <div class="img-container">
@@ -11,13 +11,12 @@
 
   <mat-card-content>
     <p>
-      These Mexican fritters are very common at fairs. In my border hometown, the line at this stand is always
-      overwhelming. People wait hours in line just to get a taste of these churros. I have run across several recipes
-      but this is the best one by far.
+      {{ descriprion | slice:0:140 }}...
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>COOK</button>
+    <button mat-icon-button color="warn">
+      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
