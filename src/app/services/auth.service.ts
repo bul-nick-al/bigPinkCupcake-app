@@ -9,15 +9,12 @@ import {CognitoUser} from 'amazon-cognito-identity-js';
   providedIn: 'root'
 })
 export class AuthService {
-
-  private signedIn: boolean;
-  private user: any;
+  public user: CognitoUser;
 
   constructor(private amplifyService: AmplifyService) {
+    this.user = null;
     this.amplifyService.authStateChange$
       .subscribe(authState => {
-        console.log(authState.state);
-        this.signedIn = authState.state === 'signedIn';
         if (!authState.user) {
           this.user = null;
         } else {
@@ -27,14 +24,18 @@ export class AuthService {
   }
 
   public isSignedIn(): boolean {
-    return this.signedIn;
+    return !(this.user === null);
   }
 
-  public getUser(): boolean {
+  public getUser(): CognitoUser {
     return this.user;
   }
 
   public signIn(login: string, password: string): Observable<CognitoUser> {
     return fromPromise(this.amplifyService.auth().signIn(login, password));
+  }
+
+  public signOut(): Observable<any> {
+    return fromPromise(this.amplifyService.auth().signOut());
   }
 }

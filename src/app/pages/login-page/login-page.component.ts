@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {AmplifyService} from 'aws-amplify-angular';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -28,11 +27,15 @@ export class LoginPageComponent implements OnInit {
   onLoginClick() {
     this.authService.signIn(this.formGroup.get('login').value, this.formGroup.get('password').value)
       .subscribe(
-        () => this.router.navigate(['xxx']),
+        () => this.router.navigate(['index']),
         (error) => {
           console.log(error);
         }
       );
+  }
+
+  onLogoutClick() {
+    this.authService.signOut();
   }
 
 }

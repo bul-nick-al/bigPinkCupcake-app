@@ -4,23 +4,29 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { RouterModule } from '@angular/router';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
-
+import { AppRoutingModule } from './app.routing';
 import {AppComponent} from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SearchComponent } from './components/search/search.component';
-import {AuthService} from './services/auth.service';
-import {AuthenticatorComponent} from 'aws-amplify-angular/dist/src/components/authenticator/authenticator/authenticator.factory';
-import {ReactiveFormsModule} from '@angular/forms';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+
+import {AuthenticatorComponent} from 'aws-amplify-angular/dist/src/components/authenticator/authenticator/authenticator.factory';
+import {AuthService} from './services/auth.service';
+
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     SearchComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MainPageComponent,
+    SearchComponent
   ],
   imports: [
+    AppRoutingModule,
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,12 +34,12 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     RouterModule,
     AmplifyAngularModule,
   ],
+  entryComponents: [AuthenticatorComponent],
   providers: [AmplifyService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
 
-export class PizzaPartyAppModule {}
 
 
