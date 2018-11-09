@@ -2,6 +2,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
+import { TagInputModule } from 'ngx-chips';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { AppRoutingModule } from './app.routing';
@@ -35,6 +37,9 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
     MaterialModule,
     RouterModule,
     AmplifyAngularModule,
+    TagInputModule,
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [AmplifyService, AuthService],
   bootstrap: [AppComponent],
