@@ -1,0 +1,14 @@
+.example-card {
+  text-align: left;
+}
+
+.img-container {
+  height: 150px;
+  padding-bottom: 15px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

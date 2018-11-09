@@ -15,6 +15,7 @@ import {AuthenticatorComponent} from 'aws-amplify-angular/dist/src/components/au
 import {AuthService} from './services/auth.service';
 
 import {ReactiveFormsModule} from '@angular/forms';
+import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     SearchComponent,
     ToolbarComponent,
     MainPageComponent,
-    SearchComponent
+    SearchComponent,
+    RecipeCardComponent
   ],
   imports: [
     AppRoutingModule,
@@ -41,5 +43,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 export class AppModule {
 }
 
+export class PizzaPartyAppModule {}
 
 
