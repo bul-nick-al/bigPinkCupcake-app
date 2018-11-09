@@ -7,6 +7,9 @@
 // AWS Mobile Hub Project Constants
 const awsmobile = {
     'aws_app_analytics': 'enable',
+    'aws_cloud_logic': 'enable',
+    'aws_cloud_api': 'enable',
+    'aws_cloud_logic_custom': [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:51819bf3-1a87-48a5-99dc-e845f9c8f19a',
     'aws_cognito_region': 'us-east-1',
     'aws_content_delivery': 'enable',
@@ -25,6 +28,6 @@ const awsmobile = {
     'aws_user_pools_id': 'us-east-1_s2YZM8p2P',
     'aws_user_pools_mfa_type': 'OFF',
     'aws_user_pools_web_client_id': '1vn383c2uqg0n61g4vhs37s4kk',
-};
+}
 
 export default awsmobile;

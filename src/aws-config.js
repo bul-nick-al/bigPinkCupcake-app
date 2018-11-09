@@ -6,6 +6,9 @@
 
 // AWS Mobile Hub Project Constants
 var aws_app_analytics = 'enable';
+var aws_cloud_logic = 'enable';
+var aws_cloud_api = 'enable';
+var aws_cloud_logic_custom = [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix"]}];
 var aws_cognito_identity_pool_id = 'us-east-1:51819bf3-1a87-48a5-99dc-e845f9c8f19a';
 var aws_cognito_region = 'us-east-1';
 var aws_content_delivery = 'enable';

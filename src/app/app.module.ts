@@ -18,6 +18,7 @@ import {AuthService} from './services/auth.service';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
+import {PredictIngredientService} from './services/predict-ingredient.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [AmplifyService, AuthService],
+  providers: [AmplifyService, AuthService, PredictIngredientService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
