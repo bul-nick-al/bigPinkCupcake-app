@@ -9,13 +9,15 @@ import {AppComponent} from './app.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     SearchComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    RecipeCardComponent
   ],
   imports: [
     BrowserModule,
