@@ -1,9 +1,12 @@
 <div class="body-main-page">
-  <app-search></app-search>
-  <app-recipe-card></app-recipe-card>
-  <app-recipe-card></app-recipe-card>
+  <div *ngIf="!recipeOpened">
+    <app-search></app-search>
+    <app-recipe-card (click)="onCardClick()"></app-recipe-card>
+    <app-recipe-card (click)="onCardClick()"></app-recipe-card>
+  </div>
 </div>
-<div class="footer">
-
+<div *ngIf="recipeOpened">
+  <app-recipe-full [peremennaya]="onClose()"></app-recipe-full>
 </div>
+<div class="footer"></div>
 <app-toolbar></app-toolbar>

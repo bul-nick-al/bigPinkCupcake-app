@@ -18,6 +18,7 @@ import {AuthService} from './services/auth.service';
 
 import {ReactiveFormsModule} from '@angular/forms';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
+import { RecipeFullComponent } from './components/recipe-full/recipe-full.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
     ToolbarComponent,
     MainPageComponent,
     SearchComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    RecipeFullComponent
   ],
   imports: [
     AppRoutingModule,

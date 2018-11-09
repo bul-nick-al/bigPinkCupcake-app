@@ -9,7 +9,18 @@ export class MainPageComponent implements OnInit {
 
   constructor() { }
 
+  public recipeOpened = false;
+
   ngOnInit() {
+  }
+
+  public onCardClick(): void {
+    console.warn('sosiska');
+    this.recipeOpened = true;
+  }
+
+  public onClose(): void {
+    this.recipeOpened = false;
   }
 
 }
