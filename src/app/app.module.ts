@@ -19,6 +19,7 @@ import {AuthService} from './services/auth.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 import {PredictIngredientService} from './services/predict-ingredient.service';
+import { RecipeFullComponent } from './components/recipe-full/recipe-full.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {PredictIngredientService} from './services/predict-ingredient.service';
     ToolbarComponent,
     MainPageComponent,
     SearchComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    RecipeFullComponent
   ],
   imports: [
     AppRoutingModule,
