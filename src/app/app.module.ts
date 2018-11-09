@@ -11,12 +11,14 @@ import { SearchComponent } from './components/search/search.component';
 import {AuthService} from './services/auth.service';
 import {AuthenticatorComponent} from 'aws-amplify-angular/dist/src/components/authenticator/authenticator/authenticator.factory';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    SearchComponent
+    SearchComponent,
+    ToolbarComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -26,7 +28,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     RouterModule,
     AmplifyAngularModule,
   ],
-  entryComponents: [AuthenticatorComponent],
   providers: [AmplifyService, AuthService],
   bootstrap: [AppComponent]
 })
