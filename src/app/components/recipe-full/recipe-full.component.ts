@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-recipe-full',
@@ -8,7 +8,9 @@ import {Component, Input, OnInit} from '@angular/core';
 export class RecipeFullComponent implements OnInit {
 
   @Input()
-  public peremennaya;
+  peremennaya;
+  @Output()
+  backClick = new EventEmitter<void>();
 
   constructor() {
   }
@@ -17,8 +19,7 @@ export class RecipeFullComponent implements OnInit {
   }
 
   public onBackClick(): void {
-    console.warn('im back');
-    this.peremennaya();
+    this.backClick.emit();
   }
 
 }

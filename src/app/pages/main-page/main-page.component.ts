@@ -1,4 +1,4 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -6,18 +6,12 @@ import {BehaviorSubject} from 'rxjs';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements OnInit, AfterViewChecked {
-
-  constructor(private cdRef: ChangeDetectorRef) { }
+export class MainPageComponent implements OnInit {
 
   public recipeOpened = new BehaviorSubject(false);
 
   ngOnInit() {
     console.log(this.recipeOpened);
-  }
-
-  ngAfterViewChecked() {
-    this.cdRef.detectChanges();
   }
 
   public onCardClick(): void {

@@ -1,5 +1,5 @@
 <div class="body-main-page">
-  <div *ngIf="(recipeOpened | async); else recipe">
+  <div *ngIf="!(recipeOpened | async); else recipe">
     <app-search></app-search>
     <app-recipe-card (click)="onCardClick()"></app-recipe-card>
     <app-recipe-card (click)="onCardClick()"></app-recipe-card>
@@ -10,6 +10,6 @@
 
 <ng-template #recipe>
   <div>
-    <app-recipe-full [peremennaya]="onClose()"></app-recipe-full>
+    <app-recipe-full (backClick)="onClose()"></app-recipe-full>
   </div>
 </ng-template>
