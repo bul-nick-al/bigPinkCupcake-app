@@ -1,0 +1,9 @@
+<div *ngFor="let recipe of recipes">
+  <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
+</div>
+
+<ng-template #recipe>
+  <div>
+    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()"></app-recipe-full>
+  </div>
+</ng-template>

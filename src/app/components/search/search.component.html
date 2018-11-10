@@ -1,12 +1,26 @@
-<div class="search-field">
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Enter ingredient" aria-label="Name" matInput  [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-</div>
+<mat-form-field class="example-chip-list search-field example-form">
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let ingredient of ingredients"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(ingredient)">
+      {{ingredient}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="New ingredients..."
+      #ingredientInput
+      [formControl]="ingredientCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
+      {{ingredient}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<!--[matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->

@@ -1,6 +1,6 @@
 .search-field{
   align-content: center;
-  padding: 10px 20px 10px 20px;
+  padding: 30px 20px 10px 20px;
 }
 
 .example-form {
@@ -11,4 +11,15 @@
 
 .example-full-width {
   width: 100%;
+}
+
+.if-not-chosen{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.example-chip-list {
+  width: 85vw;
 }

@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import {SearchComponent} from './components/search/search.component';
-// import { ParcelsPageComponent } from './pages/parsels-page/parsels-page.component';
-// import { AuthGuardService } from './guards/auth.guard';
+import {MainPageComponent} from './pages/main-page/main-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: LoginPageComponent },
-  { path: 'index', component: SearchComponent},
-  // { path: 'login', component: LoginPageComponent }
+  { path: '', component: LoginPageComponent},
+  { path: 'login', component: LoginPageComponent },
+  { path: 'index', component: MainPageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

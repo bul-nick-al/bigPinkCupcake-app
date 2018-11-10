@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login-page',
@@ -8,13 +11,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  // constructor(private router: Router) { }
+  public formGroup: FormGroup;
 
-  ngOnInit() {
+  constructor(private authService: AuthService,  private router: Router) {
+    this.authService = authService;
+    this.formGroup = new FormGroup({
+      login: new FormControl(''),
+      password: new FormControl(''),
+    });
   }
 
-  // onLoginClick() {
-  //   this.router.navigate(['index']);
-  // }
+  ngOnInit() {
+    this.checkIfAuthenticated();
+  }
+
+  onLoginClick() {
+    this.authService.signIn(this.formGroup.get('login').value, this.formGroup.get('password').value)
+      .subscribe(
+        () => this.router.navigate(['index']),
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  private checkIfAuthenticated(): void {
+    if (this.authService.isSignedIn()) {
+      this.router.navigate(['index']);
+    }
+  }
 
 }
