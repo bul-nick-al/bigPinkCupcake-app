@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { fromEvent, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/internal/operators';
 import { PredictIngredientService } from '../../services/predict-ingredient.service';
 import { RecipeService } from '../../services/recipe.service';
@@ -22,6 +22,7 @@ export class SearchComponent {
   recipesIds: string[] = [];
   ingredientCtrl = new FormControl();
   filteredIngredients: Observable<string[]>;
+  filteredIngredientsArray: string[];
   ingredients: string[] = [];
   allIngredients: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
@@ -34,14 +35,17 @@ export class SearchComponent {
     this.ingredientCtrl.valueChanges
       .pipe(debounceTime(1000))
       .subscribe(
-        (ingredient: string) => (this.filteredIngredients = predictIngredientService.predictIngredient(ingredient))
+        (ingredient: string) =>
+          (this.filteredIngredients = predictIngredientService
+            .predictIngredient(ingredient)
+            .pipe(tap(value => (this.filteredIngredientsArray = value))))
       );
   }
 
   add(event: MatChipInputEvent): void {
     // Add ingredient only when MatAutocomplete is not open
     // To make sure this does not conflict with OptionSelected Event
-    if (!this.ingredients.includes(event.value)) {
+    if (!this.filteredIngredientsArray.includes(event.value)) {
       return;
     }
     if (!this.matAutocomplete.isOpen) {
