@@ -15,7 +15,6 @@ import { Recipe } from '../../interfaces/recipe';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
@@ -25,7 +24,6 @@ export class SearchComponent {
   filteredIngredients: Observable<string[]>;
   filteredIngredientsArray: string[];
   ingredients: string[] = [];
-  allIngredients: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
   @ViewChild('ingredientInput')
   ingredientInput: ElementRef<HTMLInputElement>;
@@ -37,7 +35,7 @@ export class SearchComponent {
 
   constructor(private predictIngredientService: PredictIngredientService, private recipeService: RecipeService) {
     this.ingredientCtrl.valueChanges
-      .pipe(debounceTime(1000))
+      .pipe(debounceTime(100))
       .subscribe(
         (ingredient: string) =>
           (this.filteredIngredients = predictIngredientService
@@ -75,8 +73,8 @@ export class SearchComponent {
   }
 
   public updateRecipesIds(): void {
-    this.recipes = [];
-    this.recipeService.searchByIngredients(this.ingredients).subscribe(ids =>
+    this.recipeService.searchByIngredients(this.ingredients).subscribe(ids => {
+      this.recipes = [];
       this.recipeService.search(ids).subscribe(
         value => {
           this.recipes.push(value);
@@ -84,7 +82,8 @@ export class SearchComponent {
         },
         noop,
         () => this.loadRecipes.emit(this.recipes)
-      )
+      );
+    }
     );
   }
 

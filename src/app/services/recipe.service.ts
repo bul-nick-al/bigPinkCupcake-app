@@ -6,7 +6,7 @@ import {Storage} from 'aws-amplify';
 import {map, switchMap} from 'rxjs/operators';
 import {AmplifyService} from 'aws-amplify-angular';
 import {HttpClient} from '@angular/common/http';
-import {concatMap, mergeMap} from 'rxjs/internal/operators';
+import {concatMap, delay, mergeMap} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class RecipeService {
   public searchByIngredients(ingredients: string[]): Observable<string[]> {
     if (ingredients.length === 0) {
       console.log('ret null');
-      return of([]);
+      return of([]).pipe(delay(1000));
     } else {
       console.log('ret arr');
       return fromPromise(this.amplifyService.api()
