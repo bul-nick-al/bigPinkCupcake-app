@@ -12,9 +12,31 @@ export class MainPageComponent implements OnInit {
   public openedRecipe: Recipe;
 
   public recipeOpened = new BehaviorSubject(false);
+  public searchChosen = new BehaviorSubject(true);
+  public favoritesChosen = new BehaviorSubject(false);
+  public settingsChosen = new BehaviorSubject(false);
 
   ngOnInit() {
     console.log(this.recipeOpened);
+  }
+
+  public openSearch(): void {
+    this.searchChosen.next(true);
+    this.favoritesChosen.next(false);
+    this.settingsChosen.next(false);
+
+  }
+
+  public openFavorites(): void {
+    this.searchChosen.next(false);
+    this.favoritesChosen.next(true);
+    this.settingsChosen.next(false);
+  }
+
+  public openSettings(): void {
+    this.searchChosen.next(false);
+    this.favoritesChosen.next(false);
+    this.settingsChosen.next(true);
   }
 
   public onCardClick(recipe: Recipe): void {

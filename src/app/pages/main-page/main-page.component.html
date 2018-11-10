@@ -1,4 +1,4 @@
-<div class="body-main-page">
+<div *ngIf="(searchChosen | async)">
   <div *ngIf="!(recipeOpened | async); else recipe">
     <app-search (loadRecipes)="updateRecipes($event)"></app-search>
     <div *ngFor="let recipe of recipes">
@@ -6,8 +6,11 @@
     </div>
   </div>
 </div>
+<div *ngIf="(settingsChosen | async)">
+  <app-settings></app-settings>
+</div>
 <div class="footer"></div>
-<app-toolbar></app-toolbar>
+<app-toolbar (favoritesClick)="openFavorites()" (searchClick)="openSearch()" (settingsClick)="openSettings()"></app-toolbar>
 
 <ng-template #recipe>
   <div>

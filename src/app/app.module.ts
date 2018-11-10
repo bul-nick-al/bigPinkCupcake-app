@@ -22,6 +22,7 @@ import {PredictIngredientService} from './services/predict-ingredient.service';
 import { RecipeFullComponent } from './components/recipe-full/recipe-full.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {RecipeService} from './services/recipe.service';
     MainPageComponent,
     SearchComponent,
     RecipeCardComponent,
-    RecipeFullComponent
+    RecipeFullComponent,
+    SettingsComponent
   ],
   imports: [
     AppRoutingModule,
