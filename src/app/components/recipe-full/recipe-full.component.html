@@ -8,42 +8,63 @@
       <mat-icon>favorite</mat-icon>
     </button>
   </mat-toolbar>
-  <div style="padding-top: 56px"></div>
-  <div class="img-container">
-    <img src="{{ recipe.image }}" class="image">
-  </div>
-  <div class="description">
-    <h3>
-      Time to cook: {{ recipe.timeToCook }}
-    </h3>
-    <h3>
-      Description:
-    </h3>
-    {{ recipe.description }}
-  </div>
-  <div class="ingredients">
-    <h3>
-      Ingredients:
-    </h3>
-    <ul>
-      <div *ngFor="let ingredient of recipe.ingredients">
-        <li>
-          {{ ingredient }}
-        </li>
-      </div>
-    </ul>
-  </div>
-  <div class="preparation">
-    <h3>
-      Steps:
-    </h3>
-    <ol>
-      <div *ngFor="let step of recipe.steps">
-        <li>
-          {{ step }}
-        </li>
-      </div>
-    </ol>
-  </div>
+  <div style="padding-top: 52px"></div>
+  <mat-card class="card">
+    <div class="img-container">
+      <img  src="{{ recipe.image }}" class="image">
+    </div>
+    <mat-card-subtitle>
+    Time to cook: {{ recipe.timeToCook }}
+    </mat-card-subtitle>
+  </mat-card>
+  <!--<mat-card>-->
+    <!--<mat-card-header>-->
+      <!--<mat-card-title>-->
+        <!--Time to cook: {{ recipe.timeToCook }}-->
+      <!--</mat-card-title>-->
+    <!--</mat-card-header>-->
+  <!--</mat-card>-->
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>
+        Description:
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{ recipe.description }}
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>
+        Ingredients:
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ul>
+        <div *ngFor="let ingredient of recipe.ingredients">
+          <li>
+            {{ ingredient }}
+          </li>
+        </div>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>
+        Steps:
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ol>
+        <div *ngFor="let step of recipe.steps">
+          <li>
+            {{ step }}
+          </li>
+        </div>
+      </ol>
+    </mat-card-content>
+  </mat-card>
+  <div style="padding-top: 10px"></div>
 </div>
-

@@ -4,6 +4,7 @@ import { AmplifyService } from 'aws-amplify-angular';
 import {fromPromise} from 'rxjs/internal/observable/fromPromise';
 import {Observable} from 'rxjs';
 import {CognitoUser} from 'amazon-cognito-identity-js';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import {CognitoUser} from 'amazon-cognito-identity-js';
 export class AuthService {
   public user: CognitoUser;
 
-  constructor(private amplifyService: AmplifyService) {
+  constructor(private amplifyService: AmplifyService, private router: Router) {
     this.user = null;
     this.amplifyService.authStateChange$
       .subscribe(authState => {
@@ -37,6 +38,7 @@ export class AuthService {
 
   public signOut(): Observable<any> {
     localStorage.removeItem('isSignedIn');
+    this.router.navigate(['login']);
     return fromPromise(this.amplifyService.auth().signOut());
   }
 }

@@ -23,6 +23,7 @@ import { RecipeFullComponent } from './components/recipe-full/recipe-full.compon
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 import { SettingsComponent } from './components/settings/settings.component';
+import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     SearchComponent,
     RecipeCardComponent,
     RecipeFullComponent,
-    SettingsComponent
+    SettingsComponent,
+    RecipesStackComponent
   ],
   imports: [
     AppRoutingModule,

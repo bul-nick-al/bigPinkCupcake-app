@@ -35,10 +35,6 @@ export class LoginPageComponent implements OnInit {
       );
   }
 
-  onLogoutClick() {
-    this.authService.signOut();
-  }
-
   private checkIfAuthenticated(): void {
     if (this.authService.isSignedIn()) {
       this.router.navigate(['index']);
