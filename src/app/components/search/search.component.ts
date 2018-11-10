@@ -7,6 +7,7 @@ import { map, startWith, tap } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/internal/operators';
 import { PredictIngredientService } from '../../services/predict-ingredient.service';
 import { RecipeService } from '../../services/recipe.service';
+import {Recipe} from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,7 @@ export class SearchComponent {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  recipesIds: string[] = [];
+  recipes: Recipe[] = [];
   ingredientCtrl = new FormControl();
   filteredIngredients: Observable<string[]>;
   filteredIngredientsArray: string[];
@@ -54,14 +55,14 @@ export class SearchComponent {
       // Add our ingredient
       if ((value || '').trim()) {
         this.ingredients.push(value.trim());
-        this.updateRecipesIds();
       }
       // Reset the input value
       if (input) {
         input.value = '';
       }
       this.ingredientCtrl.setValue(null);
-    }
+      }
+      this.updateRecipesIds();
   }
 
   remove(ingredient: string): void {
@@ -74,8 +75,12 @@ export class SearchComponent {
   }
 
   public updateRecipesIds(): void {
-    // this.recipeService.searchByIngredients(this.ingredients).subscribe(result => this.recipesIds = result);
-    this.recipeService.search(this.ingredients).subscribe(result => console.warn(result));
+    this.recipes = [];
+    this.recipeService.searchByIngredients(this.ingredients)
+      .subscribe(ids => this.recipeService.search(ids).subscribe(value => {
+        this.recipes.push(value);
+        console.warn(this.recipes);
+      }));
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -84,9 +89,5 @@ export class SearchComponent {
     this.ingredientCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allIngredients.filter(ingredient => ingredient.toLowerCase().indexOf(filterValue) === 0);
-  }
 }
+

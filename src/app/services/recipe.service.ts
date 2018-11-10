@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Recipe} from '../interfaces/recipe';
 import {fromPromise} from 'rxjs/internal/observable/fromPromise';
-import {forkJoin, Observable, of} from 'rxjs';
+import {forkJoin, from, Observable, of} from 'rxjs';
 import {Storage} from 'aws-amplify';
 import {map, switchMap} from 'rxjs/operators';
 import {AmplifyService} from 'aws-amplify-angular';
 import {HttpClient} from '@angular/common/http';
-import {mergeMap} from 'rxjs/internal/operators';
+import {concatMap, mergeMap} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,8 @@ export class RecipeService {
     }
   }
 
-  public search(ingredients: string[]): Observable<Recipe[]> {
-    const idsObservable = this.searchByIngredients(ingredients);
-    return forkJoin(idsObservable).pipe(mergeMap(id => this.getRecipe(id)));
+  public search(ingredientsIds: string[]) {
+    // return this.searchByIngredients(ingredients).pipe(concatMap(id => this.getRecipe(id)));
+    return from(ingredientsIds).pipe(mergeMap(id => this.getRecipe(id)));
   }
 }
