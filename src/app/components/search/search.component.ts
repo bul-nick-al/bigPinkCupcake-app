@@ -1,13 +1,13 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, noop, Observable } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/internal/operators';
 import { PredictIngredientService } from '../../services/predict-ingredient.service';
 import { RecipeService } from '../../services/recipe.service';
-import {Recipe} from '../../interfaces/recipe';
+import { Recipe } from '../../interfaces/recipe';
 
 @Component({
   selector: 'app-search',
@@ -32,6 +32,9 @@ export class SearchComponent {
   @ViewChild('auto')
   matAutocomplete: MatAutocomplete;
 
+  @Output()
+  loadRecipes = new EventEmitter<Recipe[]>();
+
   constructor(private predictIngredientService: PredictIngredientService, private recipeService: RecipeService) {
     this.ingredientCtrl.valueChanges
       .pipe(debounceTime(1000))
@@ -46,9 +49,6 @@ export class SearchComponent {
   add(event: MatChipInputEvent): void {
     // Add ingredient only when MatAutocomplete is not open
     // To make sure this does not conflict with OptionSelected Event
-    if (!this.filteredIngredientsArray.includes(event.value)) {
-      return;
-    }
     if (!this.matAutocomplete.isOpen) {
       const input = event.input;
       const value = event.value;
@@ -61,8 +61,8 @@ export class SearchComponent {
         input.value = '';
       }
       this.ingredientCtrl.setValue(null);
-      }
-      this.updateRecipesIds();
+    }
+    this.updateRecipesIds();
   }
 
   remove(ingredient: string): void {
@@ -76,11 +76,16 @@ export class SearchComponent {
 
   public updateRecipesIds(): void {
     this.recipes = [];
-    this.recipeService.searchByIngredients(this.ingredients)
-      .subscribe(ids => this.recipeService.search(ids).subscribe(value => {
-        this.recipes.push(value);
-        console.warn(this.recipes);
-      }));
+    this.recipeService.searchByIngredients(this.ingredients).subscribe(ids =>
+      this.recipeService.search(ids).subscribe(
+        value => {
+          this.recipes.push(value);
+          console.warn(this.recipes);
+        },
+        noop,
+        () => this.loadRecipes.emit(this.recipes)
+      )
+    );
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -88,6 +93,4 @@ export class SearchComponent {
     this.ingredientInput.nativeElement.value = '';
     this.ingredientCtrl.setValue(null);
   }
-
 }
-

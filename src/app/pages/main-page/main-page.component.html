@@ -1,8 +1,9 @@
 <div class="body-main-page">
   <div *ngIf="!(recipeOpened | async); else recipe">
-    <app-search></app-search>
-    <app-recipe-card (click)="onCardClick()"></app-recipe-card>
-    <app-recipe-card (click)="onCardClick()"></app-recipe-card>
+    <app-search (loadRecipes)="updateRecipes($event)"></app-search>
+    <div *ngFor="let recipe of recipes">
+      <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
+    </div>
   </div>
 </div>
 <div class="footer"></div>
@@ -10,6 +11,6 @@
 
 <ng-template #recipe>
   <div>
-    <app-recipe-full (backClick)="onClose()"></app-recipe-full>
+    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()"></app-recipe-full>
   </div>
 </ng-template>
