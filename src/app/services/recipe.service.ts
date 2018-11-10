@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {Recipe} from '../interfaces/recipe';
 import {fromPromise} from 'rxjs/internal/observable/fromPromise';
-import {Observable, of} from 'rxjs';
+import {forkJoin, Observable, of} from 'rxjs';
 import {Storage} from 'aws-amplify';
 import {map, switchMap} from 'rxjs/operators';
 import {AmplifyService} from 'aws-amplify-angular';
 import {HttpClient} from '@angular/common/http';
+import {mergeMap} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,10 @@ export class RecipeService {
         .get('bigPinkCupcake', `/get-recipes?ingredients=${ingredients.join()}`, null))
         .pipe(map(response => response.body));
     }
+  }
+
+  public search(ingredients: string[]): Observable<Recipe[]> {
+    const idsObservable = this.searchByIngredients(ingredients);
+    return forkJoin(idsObservable).pipe(mergeMap(id => this.getRecipe(id)));
   }
 }

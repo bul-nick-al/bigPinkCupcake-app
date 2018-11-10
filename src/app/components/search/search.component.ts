@@ -62,7 +62,8 @@ export class SearchComponent {
   }
 
   public updateRecipesIds(): void {
-    this.recipeService.searchByIngredients(this.ingredients).subscribe(result => this.recipesIds = result);
+    // this.recipeService.searchByIngredients(this.ingredients).subscribe(result => this.recipesIds = result);
+    this.recipeService.search(this.ingredients).subscribe(result => console.warn(result));
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
