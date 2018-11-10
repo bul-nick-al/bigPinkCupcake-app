@@ -3,7 +3,7 @@ import {AmplifyService} from 'aws-amplify-angular';
 import {fromObservable} from 'rxjs/internal/observable/fromObservable';
 import Amplify, { Storage } from 'aws-amplify';
 import {fromPromise} from 'rxjs/internal/observable/fromPromise';
-import {map, switchMap, tap} from 'rxjs/internal/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Recipe} from '../interfaces/recipe';
@@ -23,6 +23,7 @@ export class PredictIngredientService {
 
   public getJSON(): Observable<Recipe> {
     return fromPromise(Storage.get('recipes/1.json', {level: 'public'}))
-      .pipe(switchMap((link: string) => this.http.get<Recipe>(link, {})));
+      .pipe(switchMap((link: string) => { return this.http.get<Recipe>(link, {});
+      }));
   }
 }
