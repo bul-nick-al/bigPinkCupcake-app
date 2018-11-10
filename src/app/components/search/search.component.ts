@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { fromEvent, noop, Observable } from 'rxjs';
@@ -23,12 +23,14 @@ export class SearchComponent {
   ingredientCtrl = new FormControl();
   filteredIngredients: Observable<string[]>;
   filteredIngredientsArray: string[];
-  ingredients: string[] = [];
 
   @ViewChild('ingredientInput')
   ingredientInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto')
   matAutocomplete: MatAutocomplete;
+
+  @Input()
+  ingredients: string[] = [];
 
   @Output()
   loadRecipes = new EventEmitter<Recipe[]>();
@@ -83,8 +85,7 @@ export class SearchComponent {
         noop,
         () => this.loadRecipes.emit(this.recipes)
       );
-    }
-    );
+    });
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {

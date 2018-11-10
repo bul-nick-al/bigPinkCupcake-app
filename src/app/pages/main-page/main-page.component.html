@@ -1,6 +1,7 @@
 <div *ngIf="(searchChosen | async)">
   <div *ngIf="!(recipeOpened | async); else recipe">
-    <app-search (loadRecipes)="updateRecipes($event)"></app-search>
+    <app-search [ingredients]="ingredients"
+                (loadRecipes)="updateRecipes($event)"></app-search>
     <div *ngFor="let recipe of recipes">
       <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
     </div>

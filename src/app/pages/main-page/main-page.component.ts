@@ -10,6 +10,7 @@ import { Recipe } from '../../interfaces/recipe';
 export class MainPageComponent implements OnInit {
   public recipes: Recipe[] = [];
   public openedRecipe: Recipe;
+  public ingredients: string[] = [];
 
   public recipeOpened = new BehaviorSubject(false);
   public searchChosen = new BehaviorSubject(true);
@@ -24,7 +25,6 @@ export class MainPageComponent implements OnInit {
     this.searchChosen.next(true);
     this.favoritesChosen.next(false);
     this.settingsChosen.next(false);
-
   }
 
   public openFavorites(): void {
