@@ -1,18 +1,18 @@
-<div class="example-card">
+<div *ngIf="recipe" class="example-card">
   <mat-card >
     <mat-card-header>
-      <mat-card-title>Vanilla churros</mat-card-title>
-      <mat-card-subtitle>Medium</mat-card-subtitle>
+      <mat-card-title>{{ recipe.name }}</mat-card-title>
+      <mat-card-subtitle>{{ recipe.timeToCook }}</mat-card-subtitle>
     </mat-card-header>
     <div class="img-container">
       <img class="image"
-           src="../../../assets/img/the-perfect-churros1980x1320-127049-1.jpg"
-           alt="Photo of churros">
+           src="{{ recipe.image }}"
+           alt="Photo of {{ recipe.name }}">
     </div>
 
     <mat-card-content>
       <p>
-        {{ descriprion | slice:0:140 }}...
+        {{ recipe.description | slice:0:140 }}...
       </p>
     </mat-card-content>
     <mat-card-actions>
