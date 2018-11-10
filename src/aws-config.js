@@ -7,8 +7,7 @@
 // AWS Mobile Hub Project Constants
 var aws_app_analytics = 'enable';
 var aws_cloud_logic = 'enable';
-var aws_cloud_api = 'enable';
-var aws_cloud_logic_custom = [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix"]}];
+var aws_cloud_logic_custom = [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix","/get-recipes"]}];
 var aws_cognito_identity_pool_id = 'us-east-1:51819bf3-1a87-48a5-99dc-e845f9c8f19a';
 var aws_cognito_region = 'us-east-1';
 var aws_content_delivery = 'enable';
@@ -23,6 +22,9 @@ var aws_project_name = 'bigPinkCupcake';
 var aws_project_region = 'us-east-1';
 var aws_resource_name_prefix = 'bigpinkcupcake-mobilehub-1807375008';
 var aws_sign_in_enabled = 'enable';
+var aws_user_files = 'enable';
+var aws_user_files_s3_bucket = 'bigpinkcupcake-userfiles-mobilehub-1807375008';
+var aws_user_files_s3_bucket_region = 'us-east-1';
 var aws_user_pools = 'enable';
 var aws_user_pools_id = 'us-east-1_s2YZM8p2P';
 var aws_user_pools_mfa_type = 'OFF';

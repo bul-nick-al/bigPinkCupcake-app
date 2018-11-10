@@ -33,6 +33,7 @@ export class SearchComponent {
     //   map((ingredient: string | null) => ingredient ? this._filter(ingredient) : this.allIngredients.slice()));
     this.ingredientCtrl.valueChanges.pipe(debounceTime(1000))
       .subscribe((ingredient: string) => this.filteredIngredients = predictIngredientService.predictIngredient(ingredient));
+    console.warn(this.predictIngredientService.getJSON().subscribe(value => console.warn(value)));
   }
 
   add(event: MatChipInputEvent): void {

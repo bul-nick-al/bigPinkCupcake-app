@@ -20,6 +20,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 import {PredictIngredientService} from './services/predict-ingredient.service';
 import { RecipeFullComponent } from './components/recipe-full/recipe-full.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RecipeFullComponent } from './components/recipe-full/recipe-full.compon
     AmplifyAngularModule,
     TagInputModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [AmplifyService, AuthService, PredictIngredientService],
   bootstrap: [AppComponent],

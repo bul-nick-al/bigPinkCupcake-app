@@ -22,6 +22,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkIfAuthenticated();
   }
 
   onLoginClick() {
@@ -36,6 +37,12 @@ export class LoginPageComponent implements OnInit {
 
   onLogoutClick() {
     this.authService.signOut();
+  }
+
+  private checkIfAuthenticated(): void {
+    if (this.authService.isSignedIn()) {
+      this.router.navigate(['index']);
+    }
   }
 
 }
