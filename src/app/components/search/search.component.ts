@@ -47,7 +47,6 @@ export class SearchComponent {
             .predictIngredient(ingredient)
             .pipe(tap(value => (this.filteredIngredientsArray = value))))
       );
-    this.auth.getUser();
   }
 
   add(event: MatChipInputEvent): void {
@@ -81,10 +80,9 @@ export class SearchComponent {
   public updateRecipesIds(): void {
     this.recipeService.searchByIngredients(this.ingredients).subscribe(ids => {
       this.recipes = [];
-      this.recipeService.search(ids).subscribe(
+      this.recipeService.getRecipes(ids).subscribe(
         value => {
           this.recipes.push(value);
-          console.warn(this.recipes);
         },
         noop,
         () => this.loadRecipes.emit(this.recipes)

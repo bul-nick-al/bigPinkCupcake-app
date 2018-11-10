@@ -36,7 +36,7 @@ import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.
     RecipeCardComponent,
     RecipeFullComponent,
     SettingsComponent,
-    RecipesStackComponent
+    RecipesStackComponent,
   ],
   imports: [
     AppRoutingModule,

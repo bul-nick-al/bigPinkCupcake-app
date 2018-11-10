@@ -5,6 +5,7 @@ import {fromPromise} from 'rxjs/internal/observable/fromPromise';
 import {Observable} from 'rxjs';
 import {CognitoUser} from 'amazon-cognito-identity-js';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,8 @@ export class AuthService {
     return !!localStorage.getItem('isSignedIn');
   }
 
-  public getUser() {
-    // this.amplifyService.auth().currentAuthenticatedUser().then(value => console.log(value))
-    // // return this.user.getUserData();
+  public getUser(): Observable<string> {
+    return fromPromise(this.amplifyService.auth().currentAuthenticatedUser()).pipe(map(value => value.attributes.email));
   }
 
   public signIn(login: string, password: string): Observable<CognitoUser> {

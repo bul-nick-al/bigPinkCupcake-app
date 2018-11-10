@@ -10,6 +10,13 @@
 <div *ngIf="(settingsChosen | async)">
   <app-settings></app-settings>
 </div>
+<div *ngIf="(favoritesChosen | async)">
+  <div *ngIf="!(favoriteRecipeOpened | async); else favoriteRecipe">
+    <div *ngFor="let recipe of favoriteRecipes">
+      <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
+    </div>
+  </div>
+</div>
 <div class="footer"></div>
 <app-toolbar (favoritesClick)="openFavorites()" (searchClick)="openSearch()" (settingsClick)="openSettings()"></app-toolbar>
 
@@ -18,3 +25,10 @@
     <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()"></app-recipe-full>
   </div>
 </ng-template>
+
+<ng-template #favoriteRecipe>
+  <div>
+    <app-recipe-full [recipe]="favoriteOpenedRecipe" (backClick)="onFavoriteClose()"></app-recipe-full>
+  </div>
+</ng-template>
+
