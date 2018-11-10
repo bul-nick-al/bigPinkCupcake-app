@@ -14,8 +14,7 @@
       [formControl]="ingredientCtrl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
-      [matChipInputAddOnBlur]="addOnBlur"
-      (matChipInputTokenEnd)="add($event)">
+      [matChipInputAddOnBlur]="addOnBlur">
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
