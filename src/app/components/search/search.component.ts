@@ -6,6 +6,7 @@ import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {debounceTime} from 'rxjs/internal/operators';
 import {PredictIngredientService} from '../../services/predict-ingredient.service';
+import {RecipeService} from '../../services/recipe.service';
 
 @Component({
   selector: 'app-search',
@@ -18,6 +19,7 @@ export class SearchComponent {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  recipesIds: string[] = [];
   ingredientCtrl = new FormControl();
   filteredIngredients: Observable<string[]>;
   ingredients: string[] = [];
@@ -26,14 +28,9 @@ export class SearchComponent {
   @ViewChild('ingredientInput') ingredientInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private predictIngredientService: PredictIngredientService) {
-    // this.filteredIngredients = this.ingredientCtrl.valueChanges.pipe(
-    //   startWith(''),
-    //   debounceTime(500),
-    //   map((ingredient: string | null) => ingredient ? this._filter(ingredient) : this.allIngredients.slice()));
+  constructor(private predictIngredientService: PredictIngredientService, private recipeService: RecipeService) {
     this.ingredientCtrl.valueChanges.pipe(debounceTime(1000))
       .subscribe((ingredient: string) => this.filteredIngredients = predictIngredientService.predictIngredient(ingredient));
-    this.predictIngredientService.getJSON().subscribe(value => console.warn(value));
   }
 
   add(event: MatChipInputEvent): void {
@@ -45,15 +42,14 @@ export class SearchComponent {
       // Add our ingredient
       if ((value || '').trim()) {
         this.ingredients.push(value.trim());
+        this.updateRecipesIds();
       }
-
       // Reset the input value
       if (input) {
         input.value = '';
       }
-
       this.ingredientCtrl.setValue(null);
-    }
+      }
   }
 
   remove(ingredient: string): void {
@@ -61,7 +57,12 @@ export class SearchComponent {
 
     if (index >= 0) {
       this.ingredients.splice(index, 1);
+      this.updateRecipesIds();
     }
+  }
+
+  public updateRecipesIds(): void {
+    this.recipeService.searchByIngredients(this.ingredients).subscribe(result => this.recipesIds = result);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {

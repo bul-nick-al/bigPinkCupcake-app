@@ -21,6 +21,7 @@ import { RecipeCardComponent } from './components/recipe-card/recipe-card.compon
 import {PredictIngredientService} from './services/predict-ingredient.service';
 import { RecipeFullComponent } from './components/recipe-full/recipe-full.component';
 import {HttpClientModule} from '@angular/common/http';
+import {RecipeService} from './services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,9 @@ import {HttpClientModule} from '@angular/common/http';
     TagInputModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [AmplifyService, AuthService, PredictIngredientService],
+  providers: [AmplifyService, AuthService, PredictIngredientService, RecipeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

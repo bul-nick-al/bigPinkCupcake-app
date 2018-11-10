@@ -20,10 +20,4 @@ export class PredictIngredientService {
       .get('bigPinkCupcake', `/get-ingredient-by-prefix?ingredient_prefix=${beginningString}`, null))
       .pipe(map(response => response.body));
   }
-
-  public getJSON(): Observable<Recipe> {
-    return fromPromise(Storage.get('recipes/1.json', {level: 'public'}))
-      .pipe(switchMap((link: string) => { return this.http.get<Recipe>(link, {});
-      }));
-  }
 }

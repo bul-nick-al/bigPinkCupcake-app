@@ -14,7 +14,6 @@
       [formControl]="ingredientCtrl"
       [matAutocomplete]="auto"
       [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       [matChipInputAddOnBlur]="addOnBlur"
       (matChipInputTokenEnd)="add($event)">
   </mat-chip-list>
@@ -24,3 +23,4 @@
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
+<!--[matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
