@@ -1,20 +1,21 @@
 <div class="login-body">
-  <img class="cupcake-logo" alt="Cupcake Logo" src="../assets/img/cupcake-2097943_960_720.png">
-  <div class="form" [formGroup]="formGroup">
-    <mat-form-field appearance="outline">
-      <mat-label>Enter your login</mat-label>
-      <input matInput placeholder="Login" formControlName="login">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Enter your password</mat-label>
-      <input matInput placeholder="Password" formControlName="password">
-    </mat-form-field>
+  <div class="login-container">
+    <img class="cupcake-logo" alt="Cupcake Logo" src="../assets/img/cupcake-2097943_960_720.png">
+    <div class="form" [formGroup]="formGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your login</mat-label>
+        <input matInput placeholder="Login" formControlName="login">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+    </div>
+    <a mat-stroked-button (click)="onLoginClick()" class="login-button f20px">
+      Lets go!
+    </a>
+    <div class="register-link f15px">
+      <a> Or register if you're not already!</a>
+    </div>
   </div>
-  <a mat-stroked-button (click)="onLoginClick()" class="login-button f20px">
-    Lets go!
-  </a>
-  <div class="register-link f15px">
-    <a> Or register if you're not already!</a>
-  </div>
-
 </div>

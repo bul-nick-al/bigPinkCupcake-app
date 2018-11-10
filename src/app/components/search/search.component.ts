@@ -8,6 +8,7 @@ import { debounceTime } from 'rxjs/internal/operators';
 import { PredictIngredientService } from '../../services/predict-ingredient.service';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../interfaces/recipe';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-search',
@@ -35,7 +36,9 @@ export class SearchComponent {
   @Output()
   loadRecipes = new EventEmitter<Recipe[]>();
 
-  constructor(private predictIngredientService: PredictIngredientService, private recipeService: RecipeService) {
+  constructor(
+    private predictIngredientService: PredictIngredientService, private recipeService: RecipeService,
+    private auth: AuthService) {
     this.ingredientCtrl.valueChanges
       .pipe(debounceTime(100))
       .subscribe(
@@ -44,6 +47,7 @@ export class SearchComponent {
             .predictIngredient(ingredient)
             .pipe(tap(value => (this.filteredIngredientsArray = value))))
       );
+    this.auth.getUser();
   }
 
   add(event: MatChipInputEvent): void {

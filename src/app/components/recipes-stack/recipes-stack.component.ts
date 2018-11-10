@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Recipe} from '../../interfaces/recipe';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-recipes-stack',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesStackComponent implements OnInit {
 
+  @Input()
+  recipes: Recipe[];
+
+  public recipeOpened = new BehaviorSubject(false);
+  public openedRecipe: Recipe;
+
   constructor() { }
+
+  public onCardClick(recipe: Recipe): void {
+    window.scrollTo(0, 0);
+    this.openedRecipe = recipe;
+    this.recipeOpened.next(true);
+  }
 
   ngOnInit() {
   }

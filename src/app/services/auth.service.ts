@@ -23,12 +23,12 @@ export class AuthService {
   }
 
   public isSignedIn(): boolean {
-    console.log(localStorage.getItem('isSignedIn'));
     return !!localStorage.getItem('isSignedIn');
   }
 
-  public getUser(): CognitoUser {
-    return this.user;
+  public getUser() {
+    // this.amplifyService.auth().currentAuthenticatedUser().then(value => console.log(value))
+    // // return this.user.getUserData();
   }
 
   public signIn(login: string, password: string): Observable<CognitoUser> {
