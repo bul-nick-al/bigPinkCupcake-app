@@ -41,4 +41,10 @@ export class RecipeService {
   public getRecipes(ingredientsIds: string[]) {
     return from(ingredientsIds).pipe(mergeMap(id => this.getRecipe(id)));
   }
+
+  public addToFavorites(recipeId: string) {
+    this.auth.getUser().pipe(switchMap(
+      (email: string) => this.amplifyService.api()
+        .get('bigPinkCupcake', `/add-to-favorites?user_email=${email}&recipe_id=${recipeId}`, null))).subscribe(value => console.warn(value), error1 => console.warn(error1));
+  }
 }

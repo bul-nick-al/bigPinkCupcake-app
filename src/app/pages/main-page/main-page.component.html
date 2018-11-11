@@ -13,12 +13,13 @@
 <div *ngIf="(favoritesChosen | async)">
   <div *ngIf="!(favoriteRecipeOpened | async); else favoriteRecipe">
     <div *ngFor="let recipe of favoriteRecipes">
-      <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
+      <app-recipe-card [recipe]="recipe" (click)="onFavoriteCardClick(recipe)"></app-recipe-card>
     </div>
   </div>
 </div>
 <div class="footer"></div>
-<app-toolbar (favoritesClick)="openFavorites()" (searchClick)="openSearch()" (settingsClick)="openSettings()"></app-toolbar>
+<app-toolbar (favoritesClick)="openFavorites()" (searchClick)="openSearch()" (settingsClick)="openSettings()"
+             [favoritesChosen]="favoritesChosen" [searchChosen]="searchChosen" [settingsChosen]="settingsChosen"></app-toolbar>
 
 <ng-template #recipe>
   <div>
@@ -31,4 +32,5 @@
     <app-recipe-full [recipe]="favoriteOpenedRecipe" (backClick)="onFavoriteClose()"></app-recipe-full>
   </div>
 </ng-template>
+
 

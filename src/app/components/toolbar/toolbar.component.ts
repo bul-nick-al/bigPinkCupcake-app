@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,6 +9,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class ToolbarComponent implements OnInit {
 
   constructor() { }
+
+  @Input()
+  public searchChosen: BehaviorSubject<boolean>;
+  @Input()
+  public favoritesChosen: BehaviorSubject<boolean>;
+  @Input()
+  public settingsChosen: BehaviorSubject<boolean>;
 
   @Output()
   searchClick = new EventEmitter<void>();

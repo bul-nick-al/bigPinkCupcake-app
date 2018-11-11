@@ -1,11 +1,7 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
-import {BehaviorSubject, noop} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import { Recipe } from '../../interfaces/recipe';
-import {PredictIngredientService} from '../../services/predict-ingredient.service';
-import {debounceTime} from 'rxjs/internal/operators';
 import {RecipeService} from '../../services/recipe.service';
-import {AuthService} from '../../services/auth.service';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
@@ -56,6 +52,12 @@ export class MainPageComponent implements OnInit {
     this.recipeOpened.next(true);
   }
 
+  public onFavoriteCardClick(recipe: Recipe): void {
+    window.scrollTo(0, 0);
+    this.favoriteOpenedRecipe = recipe;
+    this.favoriteRecipeOpened.next(true);
+  }
+
   public onClose(): void {
     window.scrollTo(0, 0);
     this.openedRecipe = null;
@@ -73,7 +75,7 @@ export class MainPageComponent implements OnInit {
   }
 
   public getFavoriteRecipes() {
-    this.recipeService.getFavorites().subscribe(ids =>{
+    this.recipeService.getFavorites().subscribe(ids => {
       this.favoriteRecipes = [];
       this.recipeService.getRecipes(ids).subscribe(
         value =>

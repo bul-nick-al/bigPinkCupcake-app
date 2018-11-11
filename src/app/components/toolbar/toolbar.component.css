@@ -16,3 +16,9 @@
   width: 33%;
 }
 
+.selected {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 0;
+}
+
