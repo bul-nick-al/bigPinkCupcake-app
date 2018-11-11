@@ -3,7 +3,7 @@
     <app-search [ingredients]="ingredients"
                 (loadRecipes)="updateRecipes($event)"></app-search>
     <div *ngFor="let recipe of recipes">
-      <app-recipe-card [recipe]="recipe" (click)="onCardClick(recipe)"></app-recipe-card>
+      <app-recipe-card [recipe]="recipe" (cardClick)="onCardClick(recipe) " (likeClick)="addToFavorites($event)"></app-recipe-card>
     </div>
   </div>
 </div>
@@ -13,7 +13,7 @@
 <div *ngIf="(favoritesChosen | async)">
   <div *ngIf="!(favoriteRecipeOpened | async); else favoriteRecipe">
     <div *ngFor="let recipe of favoriteRecipes">
-      <app-recipe-card [recipe]="recipe" (click)="onFavoriteCardClick(recipe)"></app-recipe-card>
+      <app-recipe-card [recipe]="recipe" (cardClick)="onFavoriteCardClick(recipe)" (likeClick)="addToFavorites($event)"></app-recipe-card>
     </div>
   </div>
 </div>
@@ -23,7 +23,7 @@
 
 <ng-template #recipe>
   <div>
-    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()"></app-recipe-full>
+    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()" ></app-recipe-full>
   </div>
 </ng-template>
 

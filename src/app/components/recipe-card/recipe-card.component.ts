@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Recipe } from '../../interfaces/recipe';
 
 @Component({
@@ -9,4 +9,16 @@ import { Recipe } from '../../interfaces/recipe';
 export class RecipeCardComponent {
   @Input()
   recipe: Recipe;
+  @Output()
+  likeClick = new EventEmitter<number>();
+  @Output()
+  cardClick = new EventEmitter<void>();
+
+  public onLikeClick(): any {
+    this.likeClick.emit(this.recipe.id);
+  }
+
+  public onClick(): void {
+    this.cardClick.emit();
+  }
 }

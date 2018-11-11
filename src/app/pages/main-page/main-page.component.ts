@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Recipe } from '../../interfaces/recipe';
-import {RecipeService} from '../../services/recipe.service';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-main-page',
@@ -21,11 +21,9 @@ export class MainPageComponent implements OnInit {
   public favoritesChosen = new BehaviorSubject(false);
   public settingsChosen = new BehaviorSubject(false);
 
-  constructor(
-    private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public openSearch(): void {
     this.searchChosen.next(true);
@@ -77,11 +75,11 @@ export class MainPageComponent implements OnInit {
   public getFavoriteRecipes() {
     this.recipeService.getFavorites().subscribe(ids => {
       this.favoriteRecipes = [];
-      this.recipeService.getRecipes(ids).subscribe(
-        value =>
-          this.favoriteRecipes.push(value)
-      );
+      this.recipeService.getRecipes(ids).subscribe(value => this.favoriteRecipes.push(value));
     });
   }
 
+  public addToFavorites(recipeId: number) {
+    this.recipeService.addToFavorites(recipeId);
+  }
 }
