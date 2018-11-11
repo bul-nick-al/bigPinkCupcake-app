@@ -23,13 +23,13 @@
 
 <ng-template #recipe>
   <div>
-    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()" ></app-recipe-full>
+    <app-recipe-full [recipe]="openedRecipe" (backClick)="onClose()" (likeClick)="addToFavorites($event)" ></app-recipe-full>
   </div>
 </ng-template>
 
 <ng-template #favoriteRecipe>
   <div>
-    <app-recipe-full [recipe]="favoriteOpenedRecipe" (backClick)="onFavoriteClose()"></app-recipe-full>
+    <app-recipe-full [recipe]="favoriteOpenedRecipe" (backClick)="onFavoriteClose()" (likeClick)="addToFavorites($event)"></app-recipe-full>
   </div>
 </ng-template>
 

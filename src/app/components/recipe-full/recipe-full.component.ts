@@ -11,8 +11,14 @@ export class RecipeFullComponent {
   recipe: Recipe;
   @Output()
   backClick = new EventEmitter<void>();
+  @Output()
+  likeClick = new EventEmitter<number>();
 
   public onBackClick(): void {
     this.backClick.emit();
+  }
+
+  public onLikeClick(): any {
+    this.likeClick.emit(this.recipe.id);
   }
 }

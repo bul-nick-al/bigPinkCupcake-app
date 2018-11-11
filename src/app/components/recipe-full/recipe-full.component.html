@@ -4,7 +4,7 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
    <span>{{ recipe.name }}</span>
-    <button mat-icon-button class="favorite-button">
+    <button mat-icon-button class="favorite-button" (click)="onLikeClick()">
       <mat-icon>favorite</mat-icon>
     </button>
   </mat-toolbar>
