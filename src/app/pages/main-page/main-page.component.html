@@ -7,9 +7,11 @@
     </div>
   </div>
 </div>
+
 <div *ngIf="(settingsChosen | async)">
   <app-settings></app-settings>
 </div>
+
 <div *ngIf="(favoritesChosen | async)">
   <div *ngIf="!(favoriteRecipeOpened | async); else favoriteRecipe">
     <div *ngFor="let recipe of favoriteRecipes">
@@ -17,6 +19,7 @@
     </div>
   </div>
 </div>
+
 <div class="footer"></div>
 <app-toolbar (favoritesClick)="openFavorites()" (searchClick)="openSearch()" (settingsClick)="openSettings()"
              [favoritesChosen]="favoritesChosen" [searchChosen]="searchChosen" [settingsChosen]="settingsChosen"></app-toolbar>

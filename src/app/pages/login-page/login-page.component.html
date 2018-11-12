@@ -1,7 +1,7 @@
 <div class="login-body">
   <div class="login-container">
     <img class="cupcake-logo" alt="Cupcake Logo" src="../assets/img/cupcake-2097943_960_720.png">
-    <div class="form" [formGroup]="formGroup">
+    <div *ngIf="(signInOpened | async)" class="form" [formGroup]="formGroup">
       <mat-form-field appearance="outline">
         <mat-label>Enter your login</mat-label>
         <input matInput placeholder="Login" formControlName="login">
@@ -10,12 +10,46 @@
         <mat-label>Enter your password</mat-label>
         <input matInput placeholder="Password" formControlName="password">
       </mat-form-field>
+
+      <a mat-stroked-button (click)="onLoginClick()" class="login-button f20px">
+        Lets go!
+      </a>
+
+      <div class="register-link f15px">
+        <a (click)="onLinkClick()" class="sign-in-link"> Or register if you're not already!</a>
+      </div>
     </div>
-    <a mat-stroked-button (click)="onLoginClick()" class="login-button f20px">
-      Lets go!
-    </a>
-    <div class="register-link f15px">
-      <a> Or register if you're not already!</a>
+    <div *ngIf="(signUpClicked | async)" class="form" [formGroup]="formGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your e-mail</mat-label>
+        <input matInput placeholder="E-mail" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your login</mat-label>
+        <input matInput placeholder="Login" formControlName="login">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput placeholder="Password" formControlName="password">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="(confirmationFieldShown | async)">
+        <mat-label>Enter confirmation code from e-mail</mat-label>
+        <input matInput placeholder="Code" formControlName="confirmationCode">
+      </mat-form-field>
+
+      <a mat-stroked-button *ngIf="(registerButtonShown | async)" (click)="onSignUpClick()"
+         class="login-button f20px">
+        Register
+      </a>
+
+      <a mat-stroked-button *ngIf="(confirmationFieldShown | async)" (click)="onConfirmClick()"
+         class="login-button f20px">
+        Confirm e-mail
+      </a>
+
     </div>
   </div>
 </div>
