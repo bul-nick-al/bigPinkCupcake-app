@@ -13,11 +13,12 @@ export class EmailService {
     this.auth
       .getUserMore()
       .pipe(
-        switchMap((user) =>
-          this.amplifyService
+        switchMap((user) => {
+          console.log(user.name, user.email);
+          return this.amplifyService
             .api()
-            .get('bigPinkCupcake', `/send-email?name=
-            ${user.name}&recipe_name=${recipeName}&email=${user.email}&image_url=${imageUrl}`, null)
+            .get('bigPinkCupcake',
+              `/send-email?name=${user.name}&recipe_name=${recipeName}&email=${user.email}&image_url=${imageUrl}`, null); }
         )
       )
       .subscribe(value => console.warn(value), error1 => console.warn(error1));

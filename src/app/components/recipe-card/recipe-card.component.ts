@@ -10,12 +10,12 @@ export class RecipeCardComponent {
   @Input()
   recipe: Recipe;
   @Output()
-  likeClick = new EventEmitter<number>();
+  likeClick = new EventEmitter<Recipe>();
   @Output()
   cardClick = new EventEmitter<void>();
 
   public onLikeClick(): any {
-    this.likeClick.emit(this.recipe.id);
+    this.likeClick.emit(this.recipe);
   }
 
   public onClick(): void {

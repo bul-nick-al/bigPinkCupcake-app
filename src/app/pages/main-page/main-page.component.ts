@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeService } from '../../services/recipe.service';
+import {EmailService} from '../../services/email.service';
 
 @Component({
   selector: 'app-main-page',
@@ -21,7 +22,7 @@ export class MainPageComponent implements OnInit {
   public favoritesChosen = new BehaviorSubject(false);
   public settingsChosen = new BehaviorSubject(false);
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private emailService: EmailService) {}
 
   ngOnInit() {}
 
@@ -79,7 +80,8 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  public addToFavorites(recipeId: number) {
-    this.recipeService.addToFavorites(recipeId);
+  public addToFavorites(recipe: Recipe) {
+    this.recipeService.addToFavorites(recipe.id);
+    this.emailService.sendEmail(recipe.image, recipe.name);
   }
 }

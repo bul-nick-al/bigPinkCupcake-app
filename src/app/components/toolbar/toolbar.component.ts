@@ -38,7 +38,6 @@ export class ToolbarComponent implements OnInit {
 
   public onSettingsClick(): void {
     this.settingsClick.emit();
-    this.email.sendEmail('https://avatars1.githubusercontent.com/u/1642247?s=88&v=4', 'cupcake');
   }
 
 }
