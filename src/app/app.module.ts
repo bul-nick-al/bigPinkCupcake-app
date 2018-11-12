@@ -24,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.component';
+import {EmailService} from './services/email.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.
     FormsModule,
     HttpClientModule,
   ],
-  providers: [AmplifyService, AuthService, PredictIngredientService, RecipeService],
+  providers: [AmplifyService, AuthService, PredictIngredientService, RecipeService, EmailService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -25,6 +25,12 @@ export class AuthService {
     return !!localStorage.getItem('isSignedIn');
   }
 
+  public getUserMore(): Observable<any> {
+    return fromPromise(this.amplifyService.auth().currentAuthenticatedUser()).pipe(
+      map(value => ({email: value.attributes.email, name: value.username}))
+    );
+  }
+
   public getUser(): Observable<string> {
     return fromPromise(this.amplifyService.auth().currentAuthenticatedUser()).pipe(
       map(value => value.attributes.email)

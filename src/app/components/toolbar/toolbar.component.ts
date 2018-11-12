@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
+import {EmailService} from '../../services/email.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private email: EmailService) { }
 
   @Input()
   public searchChosen: BehaviorSubject<boolean>;
@@ -37,6 +38,7 @@ export class ToolbarComponent implements OnInit {
 
   public onSettingsClick(): void {
     this.settingsClick.emit();
+    this.email.sendEmail('https://avatars1.githubusercontent.com/u/1642247?s=88&v=4', 'cupcake');
   }
 
 }
