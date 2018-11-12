@@ -12,6 +12,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 import {AuthService} from './services/auth.service';
@@ -24,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from './services/recipe.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.component';
+import {RecordAudioComponent} from './components/record-audio/record-audio.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.
     RecipeFullComponent,
     SettingsComponent,
     RecipesStackComponent,
+    RecordAudioComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -50,6 +53,7 @@ import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
   ],
   providers: [AmplifyService, AuthService, PredictIngredientService, RecipeService],
   bootstrap: [AppComponent],

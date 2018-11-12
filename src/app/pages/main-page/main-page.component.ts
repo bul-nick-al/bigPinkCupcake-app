@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { Recipe } from '../../interfaces/recipe';
+import { Storage } from 'aws-amplify';
 import { RecipeService } from '../../services/recipe.service';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { debounceTime, map, switchMap, tap } from 'rxjs/operators';
+import { AmplifyService } from 'aws-amplify-angular';
 
 @Component({
   selector: 'app-main-page',
@@ -20,8 +24,9 @@ export class MainPageComponent implements OnInit {
   public searchChosen = new BehaviorSubject(true);
   public favoritesChosen = new BehaviorSubject(false);
   public settingsChosen = new BehaviorSubject(false);
+  public audioRecord = new BehaviorSubject(false);
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private amplifyService: AmplifyService) {}
 
   ngOnInit() {}
 
@@ -81,5 +86,34 @@ export class MainPageComponent implements OnInit {
 
   public addToFavorites(recipeId: number) {
     this.recipeService.addToFavorites(recipeId);
+  }
+
+  public sendAudio() {
+    this.audioRecord.next(true);
+  }
+
+  public startTransjob(file: File) {
+    this.audioRecord.next(false);
+    let text = '';
+    const possible = 'bcdefghijklmnopqrstuvwxyz';
+
+    for (let i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    const fileName = `${text}.wav`;
+    Storage.put(`audio/${fileName}`, file, { 'content-type': 'audio/wav', level: 'public' });
+    setTimeout(
+      () =>
+        fromPromise(this.amplifyService.api().get('bigPinkCupcake', `/audio?fileUrl=${text}`, null)).pipe(
+          map(response => response.body),
+          debounceTime(70000),
+          switchMap((id: string) =>
+            this.amplifyService.api().get('bigPinkCupcake', `/audioanswer?jobName=${id}`, null)
+          ),
+          map(response => response.body),
+          map(ingredients => (this.ingredients = ingredients))
+        ),
+      5000
+    );
   }
 }
