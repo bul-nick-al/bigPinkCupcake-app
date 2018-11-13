@@ -25,6 +25,7 @@ import {RecipeService} from './services/recipe.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { RecipesStackComponent } from './components/recipes-stack/recipes-stack.component';
 import {EmailService} from './services/email.service';
+import {RecordAudioComponent} from './components/record-audio/record-audio.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {EmailService} from './services/email.service';
     RecipeFullComponent,
     SettingsComponent,
     RecipesStackComponent,
+    RecordAudioComponent,
   ],
   imports: [
     AppRoutingModule,

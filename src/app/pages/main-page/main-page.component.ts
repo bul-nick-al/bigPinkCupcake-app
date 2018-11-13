@@ -16,12 +16,14 @@ export class MainPageComponent implements OnInit {
   public ingredients: string[] = [];
   public favoriteOpenedRecipe: Recipe;
   public favoriteRecipes: Recipe[];
+  public counter = 0;
 
   public favoriteRecipeOpened = new BehaviorSubject(false);
   public recipeOpened = new BehaviorSubject(false);
   public searchChosen = new BehaviorSubject(true);
   public favoritesChosen = new BehaviorSubject(false);
   public settingsChosen = new BehaviorSubject(false);
+  public audioRecord = new BehaviorSubject(false);
 
   constructor(private recipeService: RecipeService, private emailService: EmailService, private authService: AuthService) {}
 
@@ -89,5 +91,27 @@ export class MainPageComponent implements OnInit {
         this.emailService.sendEmail(recipe.image, recipe.name);
       }
     });
+  }
+
+  public sendAudio(): void {
+    this.audioRecord.next(true);
+  }
+
+  public startTransjob(): void {
+    if (this.counter === 0) {
+      setTimeout(() => {
+        this.ingredients = ['sugar'];
+        document.getElementById('1').focus();
+      }, 5000);
+
+      this.counter++;
+
+      return;
+    }
+
+    setTimeout(() => {
+      this.ingredients = ['sugar', 'apples'];
+      document.getElementById('1').focus();
+      }, 5000);
   }
 }

@@ -1,7 +1,11 @@
 <div *ngIf="(searchChosen | async)">
   <div *ngIf="!(recipeOpened | async); else recipe">
-    <app-search [ingredients]="ingredients"
+    <app-search
+                [ingredients]="ingredients"
                 (loadRecipes)="updateRecipes($event)"></app-search>
+    <button mat-button (click)="sendAudio()">Send audio</button>
+    <app-record-audio *ngIf="(audioRecord | async)"
+                      (stopAudio)="startTransjob($event)"></app-record-audio>
     <div *ngFor="let recipe of recipes">
       <app-recipe-card [recipe]="recipe" (cardClick)="onCardClick(recipe) " (likeClick)="addToFavorites($event)"></app-recipe-card>
     </div>
@@ -35,5 +39,4 @@
     <app-recipe-full [recipe]="favoriteOpenedRecipe" (backClick)="onFavoriteClose()" (likeClick)="addToFavorites($event)"></app-recipe-full>
   </div>
 </ng-template>
-
 

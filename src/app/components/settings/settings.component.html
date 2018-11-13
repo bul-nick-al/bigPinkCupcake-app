@@ -1,13 +1,12 @@
 <div class="settings">
   <div class="settings-container" [formGroup]="formGroup">
-    <mat-checkbox formControlName="subscriptionCheckBox">Subscribe to the news from Big Pink Cupcake</mat-checkbox>
+    <mat-checkbox formControlName="subscriptionCheckBox"><div class="text">Subscribe to the news subscription</div></mat-checkbox>
     <h3></h3>
-    <mat-checkbox formControlName="emailCheckbox">Send me an email when I add a recipe to favorites</mat-checkbox>
+    <mat-checkbox formControlName="emailCheckbox">Notify about new favourite recipes</mat-checkbox>
     <h3></h3>
     <a mat-stroked-button (click)="onLogoutClick()" class="login-button f20px">
       Log out
     </a>
   </div>
-
 </div>
 
