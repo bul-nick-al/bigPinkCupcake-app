@@ -5,8 +5,12 @@
   background-color: #F9F4F8;
   bottom: 0;
   left: 0;
-  text-align: center;
+  /*text-align: center;*/
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.settings-container {
+  margin: 50px;
 }

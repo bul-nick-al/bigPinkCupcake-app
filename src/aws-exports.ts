@@ -8,7 +8,7 @@
 const awsmobile = {
     'aws_app_analytics': 'enable',
     'aws_cloud_logic': 'enable',
-    'aws_cloud_logic_custom': [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix","/get-recipes"]}],
+    'aws_cloud_logic_custom': [{"id":"ysfmnigmhb","name":"bigPinkCupcake","description":"","endpoint":"https://ysfmnigmhb.execute-api.us-east-1.amazonaws.com/bigPinkCupcake","region":"us-east-1","paths":["/get-ingredient-by-prefix","/get-recipes","/add-to-favorites","/audio","/audioanswer","/get-favourites","/send-email"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:51819bf3-1a87-48a5-99dc-e845f9c8f19a',
     'aws_cognito_region': 'us-east-1',
     'aws_content_delivery': 'enable',
@@ -16,6 +16,9 @@ const awsmobile = {
     'aws_content_delivery_bucket_region': 'us-east-1',
     'aws_content_delivery_cloudfront': 'enable',
     'aws_content_delivery_cloudfront_domain': 'd1i7p0k88yfzf2.cloudfront.net',
+    'aws_dynamodb': 'enable',
+    'aws_dynamodb_all_tables_region': 'us-east-1',
+    'aws_dynamodb_table_schemas': [{"tableName":"bigpinkcupcake-mobilehub-1807375008-config","attributes":[{"name":"userId","type":"S"},{"name":"is_subscribed","type":"BOOL"},{"name":"send_email","type":"BOOL"}],"indexes":[],"region":"us-east-1","hashKey":"userId"}],
     'aws_mobile_analytics_app_id': '8530d10d67af474e84baff2c374b5cfd',
     'aws_mobile_analytics_app_region': 'us-east-1',
     'aws_project_id': '40dddaec-7c13-4d6e-9509-286eaa1dd757',

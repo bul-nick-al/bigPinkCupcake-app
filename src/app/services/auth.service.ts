@@ -5,6 +5,11 @@ import { Observable } from 'rxjs';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
+import {Recipe} from '../interfaces/recipe';
+import {Storage} from 'aws-amplify';
+import {switchMap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Config} from '../interfaces/config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +17,7 @@ import { map } from 'rxjs/internal/operators';
 export class AuthService {
   public user: CognitoUser;
 
-  constructor(private amplifyService: AmplifyService, private router: Router) {
+  constructor(private amplifyService: AmplifyService, private router: Router, private http: HttpClient) {
     this.user = null;
     this.amplifyService.authStateChange$.subscribe(authState => {
       if (authState.state === 'signedIn') {
@@ -54,5 +59,16 @@ export class AuthService {
 
   public confirm(login, code): Observable<any> {
     return fromPromise(this.amplifyService.auth().confirmSignUp(login, code));
+  }
+
+  public saveConfig(isSubscribed: boolean, sendEmail: boolean) {
+    this.amplifyService.storage().put('config.json', `{"isSubscribed": ${isSubscribed}, "sendEmail": ${sendEmail}}`, {level: 'private'})
+      .then(value => console.warn(value), error1 => console.warn(error1));
+  }
+
+  public getConfig(): Observable<any> {
+    return fromPromise(this.amplifyService.storage().get('config.json',  {level: 'private'})).pipe(
+      switchMap((link: string) => this.http.get<Config>(link, {}))
+    );
   }
 }

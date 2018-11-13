@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {EmailService} from '../../services/email.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,7 +10,7 @@ import {EmailService} from '../../services/email.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private email: EmailService) { }
+  constructor(private auth: AuthService) { }
 
   @Input()
   public searchChosen: BehaviorSubject<boolean>;
@@ -37,6 +38,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   public onSettingsClick(): void {
+    // this.auth.saveConfig(false, true);
+    this.auth.getConfig().subscribe(value => console.log(value), error1 => console.log(error1));
     this.settingsClick.emit();
   }
 

@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeService } from '../../services/recipe.service';
 import {EmailService} from '../../services/email.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-page',
@@ -22,7 +23,7 @@ export class MainPageComponent implements OnInit {
   public favoritesChosen = new BehaviorSubject(false);
   public settingsChosen = new BehaviorSubject(false);
 
-  constructor(private recipeService: RecipeService, private emailService: EmailService) {}
+  constructor(private recipeService: RecipeService, private emailService: EmailService, private authService: AuthService) {}
 
   ngOnInit() {}
 
@@ -82,6 +83,11 @@ export class MainPageComponent implements OnInit {
 
   public addToFavorites(recipe: Recipe) {
     this.recipeService.addToFavorites(recipe.id);
-    this.emailService.sendEmail(recipe.image, recipe.name);
+    this.authService.getConfig().subscribe(config => {
+      if (config.sendEmail) {
+        console.warn("Senfing an email");
+        this.emailService.sendEmail(recipe.image, recipe.name);
+      }
+    });
   }
 }
