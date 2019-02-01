@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AmplifyService } from 'aws-amplify-angular';
 import { fromPromise } from 'rxjs/internal/observable/fromPromise';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
-import {Recipe} from '../interfaces/recipe';
-import {Storage} from 'aws-amplify';
-import {switchMap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import {Config} from '../interfaces/config';
+import { switchMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Config } from '../interfaces/config';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +42,12 @@ export class AuthService {
   }
 
   public signIn(login: string, password: string): Observable<CognitoUser> {
-    console.log(login, password);
+    if (this.isLocal()) {
+      localStorage.setItem('isSignedIn', 'true');
+
+      return of(null);
+    }
+
     return fromPromise(this.amplifyService.auth().signIn(login, password));
   }
 
@@ -70,5 +74,9 @@ export class AuthService {
     return fromPromise(this.amplifyService.storage().get('config.json',  {level: 'private'})).pipe(
       switchMap((link: string) => this.http.get<Config>(link, {}))
     );
+  }
+
+  private isLocal(): boolean {
+    return !environment.production;
   }
 }
